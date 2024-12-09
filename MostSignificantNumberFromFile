@@ -1,0 +1,58 @@
+/*Во дадена датотека “broevi.txt” се запишани повеќе редови со броеви така што 
+секој ред започнува со еден цел број (N>=1) што означува колку броеви следуваат 
+по него во тој ред. Да се напише програма која на СИ за секој ред ќе го испечати 
+бројот со најголема најзначајна цифра. Читањето на броеви завршува кога ќе се прочита 0.*/
+
+#include <stdio.h>
+#include <string.h>
+#define MAX 100
+
+void wtf() {
+    FILE *f = fopen("broevi.txt", "w");
+    char c;
+    while((c = getchar()) != EOF) {
+        fputc(c, f);
+    }
+    fclose(f);
+}
+
+int najznacajnaCifra(int currNumber){
+    int cifra;
+    while(currNumber > 0){
+        cifra = currNumber % 10;
+        currNumber /= 10;
+    }
+    return cifra;
+
+}
+
+int main(){
+
+    wtf();
+
+    FILE *f = fopen("broevi.txt", "r");
+    int n;
+    int currNum;
+    
+    
+    while((fscanf(f, "%d", &n))){
+        int maxNumber = 0;
+        int max = 0;
+        if(n == 0)
+            break;
+        for(int i = 0; i < n; i++){
+            fscanf(f,"%d", &currNum);
+            if(najznacajnaCifra(currNum) > max) {
+                max = najznacajnaCifra(currNum);
+                maxNumber = currNum;
+            }
+
+        }
+        printf( "%d\n", maxNumber);
+
+
+    }
+    fclose(f);
+    return 0;
+}
+
