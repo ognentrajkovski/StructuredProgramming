@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main (){
+    int m, n, g;
+    scanf("%d%d", &m, &n);
+    int flag = 1;
+    for (int i = m; i <= n; i++) {
+        int tocno = 1;
+        g=i;
+        while (g > 0){
+            if(g%10%2!=0){
+                tocno = 0;
+            }
+            g/=10;
+        }
+        if(tocno){
+            flag = 0;
+            printf("%d ", i);
+            break;
+        }
+    }
+    if (flag)
+        printf("NE");
+    return 0;
+}
